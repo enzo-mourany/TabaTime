@@ -6,7 +6,14 @@ type Props = {
   children?: JSX.Element | JSX.Element[];
 };
 
-export const DurationProvider: React.FC<Props> = ({children}) => {
+export interface IDuration {
+  durationExercises: number;
+  setDurationExercises: (durationExercises: number) => void;
+  durationRest: number;
+  setDurationRest: (durationRest: number) => void;
+}
+
+export const DurationProvider = ({children}: Props) => {
   const [durationExercises, setDurationExercises] = useState(5);
   const [durationRest, setDurationRest] = useState(5);
 
