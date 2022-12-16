@@ -1,7 +1,9 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const CountdownScreen: React.FC = ({navigation}) => {
+import {IStackScreenProps} from '../lib/StackScreenProps';
+
+const CountdownScreen: React.FC<IStackScreenProps> = ({navigation, route, nameProp}) => {
   return (
     <View>
       <Text>CountdownScreen</Text>

@@ -9,16 +9,17 @@ import {
 
 import ScrollExerciseDuration from '../components/ScrollExerciseDuration';
 import ScrollRestDuration from '../components/ScrollRestDuration';
-import {IStackNavigationProps} from '../lib/StackScreenProps';
+import {IStackScreenProps} from '../lib/StackScreenProps';
 
 const {width} = Dimensions.get('window');
 
-const HomeScreen: React.FC<IStackNavigationProps> = ({navigation, route, nameProp}) => {
+const HomeScreen: React.FC<IStackScreenProps> = ({navigation, route, nameProp}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollExerciseDuration />
       <ScrollRestDuration />
       <TouchableOpacity
+        onPress={() => navigation.navigate('Countdown')}
         style={{
           backgroundColor: 'red',
           width: 100,
