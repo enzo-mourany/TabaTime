@@ -2,15 +2,15 @@ import React from 'react';
 import {SafeAreaView, Dimensions, StyleSheet} from 'react-native';
 
 import ScrollExerciseDuration from '../components/ScrollExerciseDuration';
+import ScrollRestDuration from '../components/ScrollRestDuration';
 
 const {width} = Dimensions.get('window');
-
-//let timersRest: number[] = [...Array(13).keys()].map((i: number) => (i + 1) * 5);
 
 const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollExerciseDuration />
+      <ScrollRestDuration />
     </SafeAreaView>
   );
 };
