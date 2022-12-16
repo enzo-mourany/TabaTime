@@ -15,7 +15,7 @@ let timersExercises: number[] = [...Array(20).keys()].map(
 const ScrollExerciseDuration = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  const {setDurationExercises} = useContext(DurationContext);
+  const {setdurationExercise} = useContext(DurationContext);
 
   return (
     <View style={styles.exerciseTimerContainer}>
@@ -32,7 +32,7 @@ const ScrollExerciseDuration = () => {
           const indexExercise = Math.round(
             ev.nativeEvent.contentOffset.x / ITEM_SIZE,
           );
-          setDurationExercises(timersExercises[indexExercise]);
+          setdurationExercise(timersExercises[indexExercise]);
         }}
         showsHorizontalScrollIndicator={false}
         snapToInterval={ITEM_SIZE}

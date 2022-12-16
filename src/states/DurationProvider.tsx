@@ -1,15 +1,15 @@
 import React, {createContext, useState} from 'react';
 
 export interface DurationContextProps {
-  durationExercises: number;
-  setDurationExercises: (durationExercises: number) => void;
+  durationExercise: number;
+  setdurationExercise: (durationExercise: number) => void;
   durationRest: number;
   setDurationRest: (durationRest: number) => void;
 }
 
 export const DurationContext = createContext<DurationContextProps>({
-  durationExercises: 0,
-  setDurationExercises: () => {},
+  durationExercise: 0,
+  setdurationExercise: () => {},
   durationRest: 0,
   setDurationRest: () => {},
 });
@@ -19,14 +19,14 @@ export const DurationProvider: React.FC = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [durationExercises, setDurationExercises] = useState<number>(5);
+  const [durationExercise, setdurationExercise] = useState<number>(5);
   const [durationRest, setDurationRest] = useState<number>(5);
 
   return (
     <DurationContext.Provider
       value={{
-        durationExercises,
-        setDurationExercises,
+        durationExercise,
+        setdurationExercise,
         durationRest,
         setDurationRest,
       }}>
