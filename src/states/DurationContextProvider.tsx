@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 
-export const DurationContext = createContext();
+export const DurationContext = createContext({});
 
 type Props = {
   children?: JSX.Element | JSX.Element[];

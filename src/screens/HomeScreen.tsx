@@ -1,7 +1,16 @@
-import React, {useRef} from 'react';
-import {SafeAreaView, StatusBar, Animated, Dimensions} from 'react-native';
+import React, {useContext, useRef} from 'react';
+import {
+  SafeAreaView,
+  Animated,
+  Dimensions,
+  View,
+  Text,
+  StyleSheet,
+} from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+//import {DurationContext} from '../states/DurationContextProvider';
+
+const {width} = Dimensions.get('window');
 
 let timersExercises = [...Array(20).keys()].map((i: number) =>
   i === 0 ? 1 : i * 5,
@@ -17,13 +26,92 @@ const item_spacing = (width - item_size) / 2;
 
 const HomeScreen: React.FC = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
-  const scrollXRest = useRef(new Animated.Value(0)).current;
+
+  //const {setDurationExercises, setDurationRest} = useContext(DurationContext);
+  const [durationExercises, setDurationExercises] = React.useState(5);
 
   return (
-    <SafeAreaView>
-      <StatusBar />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.exerciseTimerContainer}>
+        <Text>{durationExercises}</Text>
+        <Animated.FlatList
+          data={timersExercises}
+          keyExtractor={item => item.toString()}
+          horizontal
+          bounces={false}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {x: scrollX}}}],
+            {useNativeDriver: true},
+          )}
+          onMomentumScrollEnd={ev => {
+            const indexExercise = Math.round(
+              ev.nativeEvent.contentOffset.x / item_size,
+            );
+            setDurationExercises(timersExercises[indexExercise]);
+          }}
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={item_size}
+          decelerationRate="fast"
+          contentContainerStyle={{paddingHorizontal: item_spacing}}
+          renderItem={({item, index}) => {
+            const inputRange = [
+              (index - 1) * item_size,
+              index * item_size,
+              (index + 1) * item_size,
+            ];
+            const opacity = scrollX.interpolate({
+              inputRange,
+              outputRange: [0.4, 1, 0.4],
+            });
+            const scale = scrollX.interpolate({
+              inputRange,
+              outputRange: [0.6, 1, 0.6],
+            });
+            return (
+              <View
+                style={{
+                  width: item_size,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Animated.Text
+                  style={[
+                    {
+                      opacity,
+                      color: 'white',
+                      fontSize: 100,
+                      transform: [
+                        {
+                          scale,
+                        },
+                      ],
+                    },
+                  ]}>
+                  {item}
+                </Animated.Text>
+              </View>
+            );
+          }}
+        />
+      </View>
     </SafeAreaView>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    width: width,
+    height: '100%',
+  },
+  exerciseTimerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    backgroundColor: 'red',
+  },
+});
