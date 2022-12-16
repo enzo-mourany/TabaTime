@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {DurationProvider} from './src/states/DurationProvider';
 
 import HomeScreen from './src/screens/HomeScreen';
+import CountdownScreen from './src/screens/CountdownScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,17 +21,8 @@ const App = () => {
             headerMode: 'float',
           }}
           animation="fade">
-          <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{
-              title: ' ',
-              headerShown: false,
-              headerStyle: {
-                backgroundColor: '#000000',
-              },
-            }}
-          />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Countdown" component={CountdownScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </DurationProvider>
