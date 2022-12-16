@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import {DurationContext} from '../states/DurationProvider';
+import {DurationContext, DurationProvider} from '../states/DurationProvider';
 
 const {width} = Dimensions.get('window');
 
@@ -24,11 +24,6 @@ const HomeScreen: React.FC = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const {durationExercises, setDurationExercises} = useContext(DurationContext);
-
-  React.useEffect(() => {
-    setDurationExercises(20);
-    console.log('durationExercises', durationExercises);
-  }, [durationExercises, setDurationExercises]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,7 +42,7 @@ const HomeScreen: React.FC = () => {
             const indexExercise = Math.round(
               ev.nativeEvent.contentOffset.x / item_size,
             );
-            () => setDurationExercises(timersExercises[indexExercise]);
+            setDurationExercises(timersExercises[indexExercise]);
           }}
           showsHorizontalScrollIndicator={false}
           snapToInterval={item_size}
