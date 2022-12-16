@@ -1,16 +1,16 @@
-import {View, Animated, StyleSheet, Dimensions} from 'react-native';
 import React, {useContext, useRef} from 'react';
+import {View, Animated, StyleSheet, Dimensions} from 'react-native';
 
 import {DurationContext} from '../states/DurationProvider';
 
 const {width} = Dimensions.get('window');
 
+const ITEM_SIZE: number = width * 0.38;
+const ITEM_SPACING: number = (width - ITEM_SIZE) / 2;
+
 let timersExercises: number[] = [...Array(20).keys()].map(
   (i: number) => (i + 1) * 5,
 );
-
-const itemSize: number = width * 0.38;
-const itemSpacing: number = (width - itemSize) / 2;
 
 const ScrollExerciseDuration = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -30,19 +30,19 @@ const ScrollExerciseDuration = () => {
         )}
         onMomentumScrollEnd={ev => {
           const indexExercise = Math.round(
-            ev.nativeEvent.contentOffset.x / itemSize,
+            ev.nativeEvent.contentOffset.x / ITEM_SIZE,
           );
           setDurationExercises(timersExercises[indexExercise]);
         }}
         showsHorizontalScrollIndicator={false}
-        snapToInterval={itemSize}
+        snapToInterval={ITEM_SIZE}
         decelerationRate="fast"
-        contentContainerStyle={{paddingHorizontal: itemSpacing}}
+        contentContainerStyle={{paddingHorizontal: ITEM_SPACING}}
         renderItem={({item, index}) => {
           const inputRange = [
-            (index - 1) * itemSize,
-            index * itemSize,
-            (index + 1) * itemSize,
+            (index - 1) * ITEM_SIZE,
+            index * ITEM_SIZE,
+            (index + 1) * ITEM_SIZE,
           ];
           const opacity = scrollX.interpolate({
             inputRange,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   exerciseScrollContainer: {
-    width: itemSize,
+    width: ITEM_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
   },
