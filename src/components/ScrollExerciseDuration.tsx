@@ -1,5 +1,7 @@
-import {View, Animated, StyleSheet, Dimensions} from 'react-native';
-import React, {useState, useRef} from 'react';
+import {View, Animated, StyleSheet, Text, Dimensions} from 'react-native';
+import React, {useContext, useRef} from 'react';
+
+import {DurationContext} from '../states/DurationProvider';
 
 const {width} = Dimensions.get('window');
 
@@ -13,10 +15,11 @@ const itemSpacing: number = (width - itemSize) / 2;
 const ScrollExerciseDuration = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  const [durationExercises, setDurationExercises] = useState(5);
+  const {durationExercises, setDurationExercises} = useContext(DurationContext);
 
   return (
     <View style={styles.exerciseTimerContainer}>
+      <Text style={{color: 'white', fontSize: 50}}>{durationExercises}</Text>
       <Animated.FlatList
         data={timersExercises}
         keyExtractor={item => item.toString()}
