@@ -12,14 +12,10 @@ import {
 
 const {width} = Dimensions.get('window');
 
-let timersExercises = [...Array(20).keys()].map((i: number) =>
-  i === 0 ? 1 : i * 5,
+let timersExercises: number[] = [...Array(20).keys()].map(
+  (i: number) => (i + 1) * 5,
 );
-timersExercises.splice(0, 1);
-let timersRest = [...Array(13).keys()].map((i: number) =>
-  i === 0 ? 1 : i * 5,
-);
-timersRest.splice(0, 1);
+//let timersRest: number[] = [...Array(13).keys()].map((i: number) => (i + 1) * 5);
 
 const item_size = width * 0.38;
 const item_spacing = (width - item_size) / 2;
