@@ -33,7 +33,6 @@ const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.exerciseTimerContainer}>
-        <Text>{durationExercises}</Text>
         <Animated.FlatList
           data={timersExercises}
           keyExtractor={item => item.toString()}
@@ -68,18 +67,12 @@ const HomeScreen: React.FC = () => {
               outputRange: [0.6, 1, 0.6],
             });
             return (
-              <View
-                style={{
-                  width: item_size,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={styles.exerciseScrollContainer}>
                 <Animated.Text
                   style={[
                     {
+                      ...styles.exerciseScrollContainerText,
                       opacity,
-                      color: 'white',
-                      fontSize: 100,
                       transform: [
                         {
                           scale,
@@ -112,6 +105,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    backgroundColor: 'red',
+  },
+  exerciseScrollContainer: {
+    width: item_size,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  exerciseScrollContainerText: {
+    color: 'white',
+    fontSize: 100,
   },
 });
