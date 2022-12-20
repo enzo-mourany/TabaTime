@@ -13,7 +13,7 @@ import {IStackScreenProps} from '../lib/StackScreenProps';
 
 const {width} = Dimensions.get('window');
 
-const HomeScreen: React.FC<IStackScreenProps> = ({navigation, route, nameProp}) => {
+const HomeScreen: React.FC<IStackScreenProps> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollExerciseDuration />
