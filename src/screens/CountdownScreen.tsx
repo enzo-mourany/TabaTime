@@ -31,11 +31,19 @@ const CountdownScreen: React.FC = () => {
     setIsRunning(!isRunning);
   };
 
+  const handleReset = () => {
+    setRemainingTime(durationExercise);
+    setIsRunning(false);
+  };
+
   return (
     <SafeAreaView>
       <Text>{remainingTime}</Text>
       <TouchableOpacity onPress={handleStart}>
-        <Text>Start</Text>
+        <Text>{isRunning ? 'Pause' : 'Start'}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleReset}>
+        <Text>Reset</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
