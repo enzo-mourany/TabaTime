@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import HomeScreen from './src/screens/HomeScreen';
 import CountdownScreen from './src/screens/CountdownScreen';
