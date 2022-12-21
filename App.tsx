@@ -1,15 +1,17 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import HomeScreen from './src/screens/HomeScreen';
-import CountdownScreen from './src/screens/CountdownScreen';
+import Navigation from './src/navigation/Navigation';
+import {NavigationContainer} from '@react-navigation/native';
 
 import {DurationProvider} from './src/states/DurationProvider';
 
 const App = () => {
   return (
-    <DurationProvider>
-      <CountdownScreen />
-    </DurationProvider>
+    <NavigationContainer>
+      <DurationProvider>
+        <Navigation />
+      </DurationProvider>
+    </NavigationContainer>
   );
 };
 
