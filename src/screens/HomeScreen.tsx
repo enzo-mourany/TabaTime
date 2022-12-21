@@ -13,12 +13,13 @@ import ScrollRestDuration from '../components/ScrollRestDuration';
 
 const {width} = Dimensions.get('window');
 
-const HomeScreen: React.FC = () => {
+const HomeScreen: React.FC = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollExerciseDuration />
       <ScrollRestDuration />
       <TouchableOpacity
+        onPress={() => navigation.navigate('Countdown')}
         style={{
           backgroundColor: 'red',
           width: 100,

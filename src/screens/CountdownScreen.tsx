@@ -6,13 +6,11 @@ import {
   View,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {MotiView} from '@motify/components';
 
 import StartButton from '../components/StartButton';
 import ResetButton from '../components/ResetButton';
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
-import {Easing} from 'react-native-reanimated';
 
 const CountdownScreen: React.FC = () => {
   const {durationExercise, durationRest} = useContext(DurationContext);
@@ -49,24 +47,6 @@ const CountdownScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {[...Array(3).keys()].map(index => {
-        return (
-          <MotiView
-            from={{opacity: 0.7, scale: 1}}
-            animate={{opacity: 0, scale: 4}}
-            transition={{
-              type: 'timing',
-              duration: 2000,
-              easing: Easing.out(Easing.ease),
-              delay: index * 400,
-              repeatReverse: false,
-              loop: true,
-            }}
-            key={index}
-            style={[StyleSheet.absoluteFillObject, styles.dot]}
-          />
-        );
-      })}
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime}</Text>
       </View>
@@ -111,11 +91,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     bottom: 50,
-  },
-  dot: {
-    width: 100,
-    height: 100,
-    borderRadius: 100,
-    backgroundColor: Colors.white,
   },
 });
