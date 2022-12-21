@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
@@ -53,9 +54,15 @@ const CountdownScreen: React.FC = () => {
       </View>
       <View style={styles.buttons}>
         <TouchableOpacity onPress={handleStart} style={styles.startButton}>
-          <Text style={styles.startButtonText}>
-            {isRunning ? 'Pause' : 'Start'}
-          </Text>
+          <LinearGradient
+            style={styles.startButton}
+            colors={[Colors.blue, Colors.cyan]}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}>
+            <Text style={styles.startButtonText}>
+              {isRunning ? 'Pause' : 'Start'}
+            </Text>
+          </LinearGradient>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleReset} style={styles.resetButton}>
           <Text style={styles.resetButtonText}>Reset</Text>
