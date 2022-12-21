@@ -4,10 +4,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
+  Dimensions,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 
 import {DurationContext} from '../states/DurationProvider';
+import {Colors} from '../styles/Styles';
+
+const {width, height} = Dimensions.get('window');
 
 const CountdownScreen: React.FC = () => {
   const {durationExercise, durationRest} = useContext(DurationContext);
@@ -49,10 +53,12 @@ const CountdownScreen: React.FC = () => {
       </View>
       <View style={styles.buttons}>
         <TouchableOpacity onPress={handleStart} style={styles.startButton}>
-          <Text>{isRunning ? 'Pause' : 'Start'}</Text>
+          <Text style={styles.startButtonText}>
+            {isRunning ? 'Pause' : 'Start'}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleReset} style={styles.resetButton}>
-          <Text>Reset</Text>
+          <Text style={styles.resetButtonText}>Reset</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -64,41 +70,53 @@ export default CountdownScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: Colors.black,
     justifyContent: 'center',
     alignItems: 'center',
   },
   timer: {
-    backgroundColor: 'white',
     width: 200,
     height: 200,
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'absolute',
   },
   textTimer: {
+    color: Colors.white,
     fontSize: 100,
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'flex-end',
+    position: 'relative',
     width: '100%',
-    marginTop: 50,
+    height: '100%',
+    bottom: 50,
   },
   startButton: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.darkGray,
     width: 100,
-    height: 100,
-    borderRadius: 50,
+    height: 50,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  startButtonText: {
+    color: Colors.white,
+    fontSize: 20,
+  },
   resetButton: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.darkGray,
     width: 100,
-    height: 100,
-    borderRadius: 50,
+    height: 50,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  resetButtonText: {
+    color: Colors.white,
+    fontSize: 20,
   },
 });
