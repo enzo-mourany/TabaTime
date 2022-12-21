@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
+import {NavigationProp} from '@react-navigation/native';
 
 import ScrollExerciseDuration from '../components/ScrollExerciseDuration';
 import ScrollRestDuration from '../components/ScrollRestDuration';
@@ -13,7 +14,16 @@ import ScrollRestDuration from '../components/ScrollRestDuration';
 
 const {width} = Dimensions.get('window');
 
-const HomeScreen: React.FC = ({navigation}) => {
+type HomeScreenProps = {
+  navigation: NavigationProp<
+    Record<string, object | undefined>,
+    string,
+    {},
+    {}
+  >;
+};
+
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollExerciseDuration />
