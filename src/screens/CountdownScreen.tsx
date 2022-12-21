@@ -7,8 +7,9 @@ import {
   Dimensions,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
+import StartButton from '../components/StartButton';
+import ResetButton from '../components/ResetButton';
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
 
@@ -53,19 +54,11 @@ const CountdownScreen: React.FC = () => {
         <Text style={styles.textTimer}>{remainingTime}</Text>
       </View>
       <View style={styles.buttons}>
-        <TouchableOpacity onPress={handleStart} style={styles.startButton}>
-          <LinearGradient
-            style={styles.startButton}
-            colors={[Colors.blue, Colors.cyan]}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}>
-            <Text style={styles.startButtonText}>
-              {isRunning ? 'Pause' : 'Start'}
-            </Text>
-          </LinearGradient>
+        <TouchableOpacity onPress={handleStart}>
+          <StartButton isRunning={isRunning} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleReset} style={styles.resetButton}>
-          <Text style={styles.resetButtonText}>Reset</Text>
+        <TouchableOpacity onPress={handleReset}>
+          <ResetButton />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -101,29 +94,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     bottom: 50,
-  },
-  startButton: {
-    backgroundColor: Colors.darkGray,
-    width: 100,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  startButtonText: {
-    color: Colors.white,
-    fontSize: 20,
-  },
-  resetButton: {
-    backgroundColor: Colors.darkGray,
-    width: 100,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  resetButtonText: {
-    color: Colors.white,
-    fontSize: 20,
   },
 });
