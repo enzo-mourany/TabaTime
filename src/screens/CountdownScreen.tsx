@@ -1,19 +1,31 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {DurationContext} from '../states/DurationProvider';
 
 const CountdownScreen: React.FC = () => {
-  const {durationExercise, durationRest} = React.useContext(DurationContext);
+  const {durationExercise, durationRest} = useContext(DurationContext);
 
-  const [isRunning, setIsRunning] = React.useState(false);
-  const [isExercise, setIsExercise] = React.useState(true);
-  const [remaintingTime, setRemaintingTime] = React.useState(durationExercise);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isExercise, setIsExercise] = useState(true);
+  const [remainingTime, setRemainingTime] = useState(durationExercise);
+
+  useEffect(() => {
+    if (isRunning) {
+      const interval = setInterval(() => {
+        setRemainingTime(prev => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isRunning]);
 
   return (
-    <View>
-      <Text>CountdownScreen</Text>
-    </View>
+    <SafeAreaView>
+      <Text>{remainingTime}</Text>
+      <TouchableOpacity>
+        <Text>Start</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 
