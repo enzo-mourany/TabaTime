@@ -4,16 +4,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  Dimensions,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
+import LottieView from 'lottie-react-native';
 
 import StartButton from '../components/StartButton';
 import ResetButton from '../components/ResetButton';
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
-
-const {width, height} = Dimensions.get('window');
 
 const CountdownScreen: React.FC = () => {
   const {durationExercise, durationRest} = useContext(DurationContext);
@@ -50,6 +48,7 @@ const CountdownScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <LottieView source={require('../assets/breathingAnimation.json')} />
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime}</Text>
       </View>
