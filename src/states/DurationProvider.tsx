@@ -14,7 +14,11 @@ export const DurationContext = createContext<DurationContextProps>({
   setDurationRest: () => {},
 });
 
-export const DurationProvider: React.FC = ({
+interface Props {
+  children: React.ReactNode;
+}
+
+export const DurationProvider: React.FC<Props> = ({
   children,
 }: {
   children: React.ReactNode;
