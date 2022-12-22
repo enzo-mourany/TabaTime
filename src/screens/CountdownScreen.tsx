@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
+import {MotiView} from 'moti';
 
 import StartButton from '../components/StartButton';
 import ResetButton from '../components/ResetButton';
@@ -25,7 +26,7 @@ const CountdownScreen: React.FC = () => {
       interval = setInterval(() => {
         setRemainingTime(prev => prev - 1);
 
-        if (remainingTime === 0) {
+        if (remainingTime === 1) {
           setIsExercise(!isExercise);
           setRemainingTime(isExercise ? durationRest : durationExercise);
         }
