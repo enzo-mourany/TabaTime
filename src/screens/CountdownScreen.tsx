@@ -11,6 +11,7 @@ import StartButton from '../components/StartButton';
 import ResetButton from '../components/ResetButton';
 import AnimatedBackground from '../components/AnimatedBackground';
 import AnimatedWave from '../components/AnimatedWave';
+import CircularProgress from '../components/CircularProgress';
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
 
@@ -51,6 +52,7 @@ const CountdownScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <AnimatedBackground />
       <AnimatedWave />
+      <CircularProgress />
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime}</Text>
         <Text style={styles.exerciseStatus}>
@@ -90,6 +92,13 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 100,
     fontWeight: 'bold',
+    shadowColor: Colors.white,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
   },
   exerciseStatus: {
     color: Colors.white,
