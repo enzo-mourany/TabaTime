@@ -15,16 +15,22 @@ import CircularProgress from '../components/CircularProgress';
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
 
-const CountdownScreen: React.FC = () => {
+interface CountdownScreenProps {}
+
+const CountdownScreen: React.FC<CountdownScreenProps> = () => {
   const {durationExercise, durationRest} = useContext(DurationContext);
 
-  const [isRunning, setIsRunning] = useState(false);
+  interface IRunningState {
+    isRunning: boolean;
+  }
+
+  const [isRunning, setIsRunning] = useState<IRunningState>({isRunning: false});
   const [isExercise, setIsExercise] = useState(true);
   const [remainingTime, setRemainingTime] = useState(durationExercise);
 
   useEffect(() => {
     let interval: any;
-    if (isRunning) {
+    if (isRunning.isRunning) {
       interval = setInterval(() => {
         setRemainingTime(prev => prev - 1);
 
@@ -40,13 +46,13 @@ const CountdownScreen: React.FC = () => {
   }, [isRunning, remainingTime, isExercise, durationExercise, durationRest]);
 
   const handleStart = () => {
-    setIsRunning(!isRunning);
+    setIsRunning({isRunning: !isRunning.isRunning});
   };
 
   const handleReset = () => {
     setRemainingTime(durationExercise);
     setIsExercise(true);
-    setIsRunning(false);
+    setIsRunning({isRunning: false});
   };
 
   return (
@@ -65,7 +71,7 @@ const CountdownScreen: React.FC = () => {
       </View>
       <View style={styles.buttons}>
         <TouchableOpacity onPress={handleStart}>
-          <StartButton isRunning={isRunning} />
+          <StartButton isRunning={isRunning.isRunning} />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleReset}>
           <ResetButton />
