@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
 import {Colors} from '../styles/Styles';
 
@@ -11,13 +10,7 @@ interface StartButtonProps {
 const StartButton: React.FC<StartButtonProps> = ({isRunning}) => {
   return (
     <View style={styles.button}>
-      <LinearGradient
-        style={styles.button}
-        colors={[Colors.blue, Colors.cyan]}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}>
-        <Text style={styles.buttonText}>{isRunning ? 'Pause' : 'Start'}</Text>
-      </LinearGradient>
+      <Text style={styles.buttonText}>{isRunning ? 'Pause' : 'Start'}</Text>
     </View>
   );
 };
@@ -26,7 +19,8 @@ export default StartButton;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.darkGray,
+    backgroundColor: Colors.cyan,
+    blurRadius: 20,
     width: 100,
     height: 50,
     borderRadius: 25,

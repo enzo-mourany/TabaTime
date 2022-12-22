@@ -20,7 +20,7 @@ const AnimatedBackground: React.FC = () => {
 
   return (
     <LinearGradient
-      colors={[Colors.blue, Colors.cyan]}
+      colors={[Colors.black, Colors.cyan]}
       style={styles.container}
       start={{x: 1, y: 1}}
       end={{x: 1, y: 0}}
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '100%',
+    height: '120%',
     position: 'absolute',
   },
 });

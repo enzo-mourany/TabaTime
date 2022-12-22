@@ -1,19 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
 import {Colors} from '../styles/Styles';
 
 const ResetButton: React.FC = () => {
   return (
     <View style={styles.button}>
-      <LinearGradient
-        style={styles.button}
-        colors={[Colors.blue, Colors.cyan]}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}>
-        <Text style={styles.buttonText}>Reset</Text>
-      </LinearGradient>
+      <Text style={styles.buttonText}>Reset</Text>
     </View>
   );
 };
@@ -22,7 +15,7 @@ export default ResetButton;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.darkGray,
+    backgroundColor: Colors.cyan,
     width: 100,
     height: 50,
     borderRadius: 25,
