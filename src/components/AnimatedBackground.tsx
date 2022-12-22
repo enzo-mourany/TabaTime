@@ -20,7 +20,7 @@ const AnimatedBackground: React.FC = () => {
 
   return (
     <LinearGradient
-      colors={[Colors.black, Colors.cyan]}
+      colors={[Colors.darkGray, Colors.cyan]}
       style={styles.container}
       start={{x: 1, y: 1}}
       end={{x: 1, y: 0}}
