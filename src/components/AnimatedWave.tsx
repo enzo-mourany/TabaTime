@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
   },
   circle: {
     width: 100,

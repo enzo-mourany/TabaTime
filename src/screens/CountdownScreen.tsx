@@ -6,10 +6,10 @@ import {
   View,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {MotiView} from 'moti';
 
 import StartButton from '../components/StartButton';
 import ResetButton from '../components/ResetButton';
+import AnimatedWave from '../components/AnimatedWave';
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
 
@@ -48,6 +48,7 @@ const CountdownScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <AnimatedWave />
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime}</Text>
       </View>
