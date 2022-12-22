@@ -4,12 +4,20 @@ import Svg, {Circle} from 'react-native-svg';
 
 import {Colors} from '../styles/Styles';
 
-const CircularProgress = () => {
+interface CircularProgressProps {
+  remainingTime: number;
+  initialValue: number;
+}
+
+const CircularProgress: React.FC<CircularProgressProps> = ({
+  remainingTime,
+  initialValue,
+}) => {
   let size = 280;
   let strokeWidth = 3;
   const radius = (size - strokeWidth) / 2;
   const circum = radius * 2 * Math.PI;
-  const svgProgress = 100 - 80;
+  const svgProgress = 100 - (remainingTime / initialValue) * 100;
 
   return (
     <View style={styles.container}>

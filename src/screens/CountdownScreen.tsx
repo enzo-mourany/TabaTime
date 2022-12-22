@@ -52,7 +52,10 @@ const CountdownScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <AnimatedBackground />
       <AnimatedWave />
-      <CircularProgress />
+      <CircularProgress
+        remainingTime={remainingTime}
+        initialValue={isExercise ? durationExercise : durationRest}
+      />
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime}</Text>
         <Text style={styles.exerciseStatus}>
