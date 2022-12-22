@@ -1,74 +1,30 @@
 import React, {useRef, useEffect} from 'react';
-import {View, Text, StyleSheet, Animated, Easing} from 'react-native';
+import {StyleSheet, Animated, Easing} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
-const AnimatedBackground = () => {
-  const backgroundColor = useRef(new Animated.Value(0)).current;
-  const shapeSize = useRef(new Animated.Value(100)).current;
-  const shapeOpacity = useRef(new Animated.Value(1)).current;
+import {Colors} from '../styles/Styles';
 
-  const animateBackground = () => {
-    backgroundColor.setValue(0);
-    shapeSize.setValue(100);
-    shapeOpacity.setValue(1);
-
-    Animated.timing(backgroundColor, {
-      toValue: 1,
-      duration: 10000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start(() => animateBackground());
-
-    Animated.timing(shapeSize, {
-      toValue: 200,
-      duration: 10000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
-
-    Animated.timing(shapeOpacity, {
-      toValue: 0,
-      duration: 10000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
-  };
+const AnimatedBackground: React.FC = () => {
+  const animation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    animateBackground();
-  }, []);
-
-  const backgroundColorInterpolate = backgroundColor.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)'],
-  });
-
-  const shapeSizeInterpolate = shapeSize.interpolate({
-    inputRange: [100, 200],
-    outputRange: ['50%', '100%'],
-  });
+    Animated.loop(
+      Animated.timing(animation, {
+        toValue: 1,
+        duration: 5000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ).start();
+  }, [animation]);
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        {
-          backgroundColor: backgroundColorInterpolate,
-        },
-      ]}>
-      <Animated.View
-        style={[
-          styles.shape,
-          {
-            width: shapeSizeInterpolate,
-            height: shapeSizeInterpolate,
-            opacity: shapeOpacity,
-          },
-        ]}
-      />
-      <View style={styles.overlay}>
-        <Text>Animated Background with Blur</Text>
-      </View>
-    </Animated.View>
+    <LinearGradient
+      colors={[Colors.blue, Colors.cyan]}
+      style={styles.container}
+      start={{x: 1, y: 1}}
+      end={{x: 1, y: 0}}
+    />
   );
 };
 
@@ -77,21 +33,10 @@ export default AnimatedBackground;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-  },
-  shape: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderRadius: 50,
-  },
-  overlay: {
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
     position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

@@ -9,6 +9,7 @@ import React, {useContext, useEffect, useState} from 'react';
 
 import StartButton from '../components/StartButton';
 import ResetButton from '../components/ResetButton';
+import AnimatedBackground from '../components/AnimatedBackground';
 import AnimatedWave from '../components/AnimatedWave';
 import {DurationContext} from '../states/DurationProvider';
 import {Colors} from '../styles/Styles';
@@ -48,9 +49,13 @@ const CountdownScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <AnimatedBackground />
       <AnimatedWave />
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime}</Text>
+        <Text style={styles.exerciseStatus}>
+          {isExercise ? 'REST' : 'EXERCISE'}
+        </Text>
       </View>
       <View style={styles.buttons}>
         <TouchableOpacity onPress={handleStart}>
@@ -84,6 +89,12 @@ const styles = StyleSheet.create({
   textTimer: {
     color: Colors.white,
     fontSize: 100,
+    fontWeight: 'bold',
+  },
+  exerciseStatus: {
+    color: Colors.white,
+    fontSize: 20,
+    opacity: 0.5,
   },
   buttons: {
     flexDirection: 'row',
