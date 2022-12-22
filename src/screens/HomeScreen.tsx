@@ -4,15 +4,16 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
-  Text,
+  View,
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 
 import ScrollExerciseDuration from '../components/ScrollExerciseDuration';
 import ScrollRestDuration from '../components/ScrollRestDuration';
-//import {IStackScreenProps} from '../lib/StackScreenProps';
+import AnimatedBackground from '../components/AnimatedBackground';
+import NavigateButton from '../components/NavigateButton';
 
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 type HomeScreenProps = {
   navigation: NavigationProp<
@@ -26,22 +27,15 @@ type HomeScreenProps = {
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollExerciseDuration />
-      <ScrollRestDuration />
+      <AnimatedBackground />
+      <View style={styles.scrollView}>
+        <ScrollExerciseDuration />
+        <ScrollRestDuration />
+      </View>
       <TouchableOpacity
         onPress={() => navigation.navigate('Countdown')}
-        style={{
-          backgroundColor: 'red',
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          bottom: 50,
-          right: 50,
-        }}>
-        <Text style={{color: 'white', fontSize: 20}}>Start</Text>
+        style={styles.button}>
+        <NavigateButton />
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -52,8 +46,19 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'black',
     width: width,
-    height: '100%',
+    height: height,
+  },
+  scrollView: {
+    position: 'relative',
+    marginTop: 100,
+    marginBottom: 150,
+  },
+  button: {
+    position: 'absolute',
+    bottom: 70,
   },
 });

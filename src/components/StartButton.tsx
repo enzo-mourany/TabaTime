@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
       height: 0,
     },
     shadowOpacity: 0.3,
-    shadowRadius: 10,
+    shadowRadius: 5,
   },
   buttonText: {
     color: Colors.white,

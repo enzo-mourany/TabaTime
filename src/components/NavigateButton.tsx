@@ -3,19 +3,20 @@ import React from 'react';
 
 import {Colors} from '../styles/Styles';
 
-const ResetButton: React.FC = () => {
+const StartButton: React.FC = () => {
   return (
     <View style={styles.button}>
-      <Text style={styles.buttonText}>Reset</Text>
+      <Text style={styles.buttonText}>Run</Text>
     </View>
   );
 };
 
-export default ResetButton;
+export default StartButton;
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.cyan,
+    blurRadius: 20,
     width: 100,
     height: 50,
     borderRadius: 25,
