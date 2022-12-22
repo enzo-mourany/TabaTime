@@ -45,6 +45,7 @@ const CountdownScreen: React.FC = () => {
 
   const handleReset = () => {
     setRemainingTime(durationExercise);
+    setIsExercise(true);
     setIsRunning(false);
   };
 
@@ -59,7 +60,7 @@ const CountdownScreen: React.FC = () => {
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime}</Text>
         <Text style={styles.exerciseStatus}>
-          {isExercise ? 'REST' : 'EXERCISE'}
+          {isExercise ? 'EXERCISE' : 'REST'}
         </Text>
       </View>
       <View style={styles.buttons}>
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.2,
     shadowRadius: 10,
   },
   exerciseStatus: {
