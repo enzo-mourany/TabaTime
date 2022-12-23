@@ -24,19 +24,27 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
     isRunning: boolean;
   }
 
+  interface IRemainingTimeState {
+    remainingTime: number;
+  }
+
   const [isRunning, setIsRunning] = useState<IRunningState>({isRunning: false});
   const [isExercise, setIsExercise] = useState(true);
-  const [remainingTime, setRemainingTime] = useState(durationExercise);
+  const [remainingTime, setRemainingTime] = useState<IRemainingTimeState>({
+    remainingTime: durationExercise,
+  });
 
   useEffect(() => {
     let interval: any;
     if (isRunning.isRunning) {
       interval = setInterval(() => {
-        setRemainingTime(prev => prev - 1);
+        setRemainingTime({remainingTime: remainingTime.remainingTime - 1});
 
-        if (remainingTime === 1) {
+        if (remainingTime.remainingTime === 1) {
           setIsExercise(!isExercise);
-          setRemainingTime(isExercise ? durationRest : durationExercise);
+          setRemainingTime({
+            remainingTime: isExercise ? durationRest : durationExercise,
+          });
         }
       }, 1000);
     } else {
@@ -50,7 +58,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
   };
 
   const handleReset = () => {
-    setRemainingTime(durationExercise);
+    setRemainingTime({remainingTime: durationExercise});
     setIsExercise(true);
     setIsRunning({isRunning: false});
   };
@@ -60,11 +68,11 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
       <AnimatedBackground />
       <AnimatedWave />
       <CircularProgress
-        remainingTime={remainingTime}
+        remainingTime={remainingTime.remainingTime}
         initialValue={isExercise ? durationExercise : durationRest}
       />
       <View style={styles.timer}>
-        <Text style={styles.textTimer}>{remainingTime}</Text>
+        <Text style={styles.textTimer}>{remainingTime.remainingTime}</Text>
         <Text style={styles.exerciseStatus}>
           {isExercise ? 'EXERCISE' : 'REST'}
         </Text>
