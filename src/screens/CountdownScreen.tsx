@@ -70,6 +70,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
       <CircularProgress
         remainingTime={remainingTime.remainingTime}
         initialValue={isExercise ? durationExercise : durationRest}
+        isRunning={isRunning.isRunning}
       />
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime.remainingTime}</Text>

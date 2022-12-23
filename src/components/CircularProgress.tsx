@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 import Svg, {Circle} from 'react-native-svg';
 
@@ -7,32 +7,46 @@ import {Colors} from '../styles/Styles';
 interface CircularProgressProps {
   remainingTime: number;
   initialValue: number;
+  isRunning: boolean;
 }
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
-  remainingTime,
   initialValue,
+  remainingTime,
+  isRunning,
 }) => {
+  const [progressValue, setProgressValue] = useState(initialValue);
+
   const size: number = 280;
   const strokeWidth: number = 3;
   const radius: number = (size - strokeWidth) / 2;
   const circum: number = radius * 2 * Math.PI;
-  const svgProgress: number = 100 - (remainingTime / initialValue) * 100;
+  const svgProgress: number = 100 - (progressValue / initialValue) * 100;
 
   const progressAnimation = useRef(new Animated.Value(0)).current;
   const progressRef = useRef(null);
 
-  const animation = (toValue: number) => {
+  const animation = () => {
     return Animated.timing(progressAnimation, {
-      toValue,
-      duration: 1000,
+      toValue: 100,
+      duration: initialValue * 1000,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const resetAnimation = () => {
+    return Animated.timing(progressAnimation, {
+      toValue: 0,
+      duration: 100,
       useNativeDriver: true,
     }).start();
   };
 
   useEffect(() => {
-    animation(svgProgress);
-  }, [svgProgress]);
+    if (isRunning) {
+      animation();
+    }
+  }, [isRunning]);
 
   useEffect(() => {
     progressAnimation.addListener(
