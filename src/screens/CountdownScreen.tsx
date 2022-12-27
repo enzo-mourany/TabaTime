@@ -28,11 +28,17 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
     remainingTime: number;
   }
 
+  interface ICircularProgressActiveState {
+    isCircularProgressActive: boolean;
+  }
+
   const [isRunning, setIsRunning] = useState<IRunningState>({isRunning: false});
   const [isExercise, setIsExercise] = useState(true);
   const [remainingTime, setRemainingTime] = useState<IRemainingTimeState>({
     remainingTime: durationExercise,
   });
+  const [isCircularProgressActive, setIsCircularProgressActive] =
+    useState<ICircularProgressActiveState>({isCircularProgressActive: false});
 
   useEffect(() => {
     let interval: any;
@@ -55,12 +61,19 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
 
   const handleStart = () => {
     setIsRunning({isRunning: !isRunning.isRunning});
+    setIsCircularProgressActive({
+      isCircularProgressActive:
+        !isCircularProgressActive.isCircularProgressActive,
+    });
   };
 
   const handleReset = () => {
     setRemainingTime({remainingTime: durationExercise});
     setIsExercise(true);
     setIsRunning({isRunning: false});
+    setIsCircularProgressActive({
+      isCircularProgressActive: false,
+    });
   };
 
   return (
