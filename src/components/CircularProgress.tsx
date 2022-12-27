@@ -36,43 +36,23 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       toValue: 100,
       duration: initialValue * 1000,
       useNativeDriver: true,
-    }).start();
-  };
-
-  const resetAnimation = () => {
-    return Animated.timing(progressAnimation, {
-      toValue: 0,
-      duration: 100,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  useEffect(() => {
-    let interval: any;
-    if (isCircularProgressActive) {
-      interval = setInterval(() => {
+    }).start(result => {
+      if (result.finished) {
         setProgressValue(0);
-
-        if (remainingTime === 1) {
-          setInitialValue(isRunning ? durationExercise : durationRest);
-          setProgressValue(isRunning ? durationExercise : durationRest);
-        }
-      }, 1000);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [
-    isCircularProgressActive,
-    remainingTime,
-    isRunning,
-    durationExercise,
-    durationRest,
-  ]);
+        setInitialValue(isRunning ? durationExercise : durationRest);
+        setProgressValue(isRunning ? durationExercise : durationRest);
+        // restart animation to 100
+        progressAnimation.setValue(0);
+        animation();
+      }
+    });
+  };
 
   useEffect(() => {
     if (isRunning) {
       animation();
+    } else {
+      (progressAnimation as any).stopAnimation();
     }
   }, [isRunning]);
 
