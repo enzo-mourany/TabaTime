@@ -1,21 +1,26 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useContext, useRef, useEffect, useState} from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 import Svg, {Circle} from 'react-native-svg';
 
 import {Colors} from '../styles/Styles';
 
+import {DurationContext} from '../states/DurationProvider';
+
 interface CircularProgressProps {
-  remainingTime: number;
-  initialValue: number;
+  isCircularProgressActive: boolean;
   isRunning: boolean;
+  remainingTime: number;
 }
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
-  initialValue,
-  remainingTime,
+  isCircularProgressActive,
   isRunning,
+  remainingTime,
 }) => {
-  const [progressValue, setProgressValue] = useState(initialValue);
+  const {durationExercise, durationRest} = useContext(DurationContext);
+
+  const [initialValue, setInitialValue] = useState(durationExercise);
+  const [progressValue, setProgressValue] = useState(durationExercise);
 
   const size: number = 280;
   const strokeWidth: number = 3;
@@ -41,6 +46,29 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       useNativeDriver: true,
     }).start();
   };
+
+  useEffect(() => {
+    let interval: any;
+    if (isCircularProgressActive) {
+      interval = setInterval(() => {
+        setProgressValue(0);
+
+        if (remainingTime === 1) {
+          setInitialValue(isRunning ? durationExercise : durationRest);
+          setProgressValue(isRunning ? durationExercise : durationRest);
+        }
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [
+    isCircularProgressActive,
+    remainingTime,
+    isRunning,
+    durationExercise,
+    durationRest,
+  ]);
 
   useEffect(() => {
     if (isRunning) {
