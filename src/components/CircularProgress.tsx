@@ -1,6 +1,7 @@
 import React, {useContext, useRef, useEffect, useState} from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 import Svg, {Circle} from 'react-native-svg';
+import {Easing} from 'react-native-reanimated';
 
 import {Colors} from '../styles/Styles';
 
@@ -9,6 +10,7 @@ import {DurationContext} from '../states/DurationProvider';
 interface CircularProgressProps {
   isCircularProgressActive: boolean;
   isRunning: boolean;
+  isExercise: boolean;
   remainingTime: number;
 }
 
@@ -16,6 +18,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   isCircularProgressActive,
   isRunning,
   remainingTime,
+  isExercise,
 }) => {
   const {durationExercise, durationRest} = useContext(DurationContext);
 
@@ -36,12 +39,12 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       toValue: 100,
       duration: initialValue * 1000,
       useNativeDriver: true,
+      easing: Easing.linear,
+      isInteraction: false,
     }).start(result => {
       if (result.finished) {
-        setProgressValue(0);
-        setInitialValue(isRunning ? durationExercise : durationRest);
-        setProgressValue(isRunning ? durationExercise : durationRest);
-        // restart animation to 100
+        setProgressValue(isExercise ? durationExercise : durationRest);
+        setInitialValue(isExercise ? durationExercise : durationRest);
         progressAnimation.setValue(0);
         animation();
       }
@@ -49,12 +52,12 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   };
 
   useEffect(() => {
-    if (isRunning) {
+    if (isRunning && isCircularProgressActive) {
       animation();
     } else {
       (progressAnimation as any).stopAnimation();
     }
-  }, [isRunning]);
+  }, [isRunning, progressAnimation]);
 
   useEffect(() => {
     progressAnimation.addListener(
