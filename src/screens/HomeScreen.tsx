@@ -1,34 +1,13 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {NavigationProp} from '@react-navigation/native';
+import {SafeAreaView, Dimensions, StyleSheet} from 'react-native';
 
-import ScrollExerciseDuration from '../components/ScrollExerciseDuration';
-import ScrollRestDuration from '../components/ScrollRestDuration';
-import AnimatedBackground from '../components/AnimatedBackground';
-import NavigateButton from '../components/NavigateButton';
 import TabataRunBox from '../components/TabataRunBox';
 
 const {width, height} = Dimensions.get('window');
 
-type HomeScreenProps = {
-  navigation: NavigationProp<
-    Record<string, object | undefined>,
-    string,
-    {},
-    {}
-  >;
-};
-
-const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <AnimatedBackground />
       <TabataRunBox />
     </SafeAreaView>
   );
