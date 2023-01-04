@@ -45,16 +45,15 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
     if (isRunning.isRunning) {
       interval = setInterval(() => {
         setRemainingTime({remainingTime: remainingTime.remainingTime - 1});
-
-        if (remainingTime.remainingTime === 1) {
-          setIsExercise(!isExercise);
-          setRemainingTime({
-            remainingTime: isExercise ? durationRest : durationExercise,
-          });
-        }
       }, 1000);
     } else {
       clearInterval(interval);
+    }
+    if (remainingTime.remainingTime === 0) {
+      setIsExercise(!isExercise);
+      setRemainingTime({
+        remainingTime: isExercise ? durationRest : durationExercise,
+      });
     }
     return () => clearInterval(interval);
   }, [isRunning, remainingTime, isExercise, durationExercise, durationRest]);
@@ -85,7 +84,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
           isCircularProgressActive.isCircularProgressActive
         }
         isRunning={isRunning.isRunning}
-        remainingTime={remainingTime.remainingTime}
+        isExercise={isExercise}
       />
       <View style={styles.timer}>
         <Text style={styles.textTimer}>{remainingTime.remainingTime}</Text>

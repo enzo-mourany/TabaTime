@@ -2,6 +2,7 @@ import React, {useContext, useRef, useEffect, useState} from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 import Svg, {Circle} from 'react-native-svg';
 import {Easing} from 'react-native-reanimated';
+import {useValues, useClock, useInterval, timing} from 'react-native-redash';
 
 import {Colors} from '../styles/Styles';
 
@@ -11,13 +12,11 @@ interface CircularProgressProps {
   isCircularProgressActive: boolean;
   isRunning: boolean;
   isExercise: boolean;
-  remainingTime: number;
 }
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
   isCircularProgressActive,
   isRunning,
-  remainingTime,
   isExercise,
 }) => {
   const {durationExercise, durationRest} = useContext(DurationContext);
