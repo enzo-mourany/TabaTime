@@ -12,6 +12,7 @@ import ScrollExerciseDuration from '../components/ScrollExerciseDuration';
 import ScrollRestDuration from '../components/ScrollRestDuration';
 import AnimatedBackground from '../components/AnimatedBackground';
 import NavigateButton from '../components/NavigateButton';
+import TabataRunBox from '../components/TabataRunBox';
 
 const {width, height} = Dimensions.get('window');
 
@@ -28,15 +29,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <AnimatedBackground />
-      <View style={styles.scrollView}>
-        <ScrollExerciseDuration />
-        <ScrollRestDuration />
-      </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Countdown')}
-        style={styles.button}>
-        <NavigateButton />
-      </TouchableOpacity>
+      <TabataRunBox />
     </SafeAreaView>
   );
 };
