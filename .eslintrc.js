@@ -11,6 +11,16 @@ module.exports = {
         'no-shadow': 'off',
         'no-undef': 'off',
       },
+      "no-whitespace-before-property": "error",
+      'sort-imports': [
+        2,
+        {
+          ignoreCase: true,
+          ignoreDeclarationSort: true,
+          ignoreMemberSort: false,
+          memberSyntaxSortOrder: ['all', 'multiple', 'single', 'none'],
+        },
+      ],
     },
   ],
 };
