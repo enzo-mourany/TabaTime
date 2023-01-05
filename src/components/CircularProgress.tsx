@@ -1,12 +1,11 @@
-import React, {useContext, useRef, useEffect, useState} from 'react';
-import {View, StyleSheet, Animated} from 'react-native';
-import Svg, {Circle} from 'react-native-svg';
-import {Easing} from 'react-native-reanimated';
-import {useValues, useClock, useInterval, timing} from 'react-native-redash';
+import React, { useContext, useRef, useEffect, useState } from 'react';
+import { View, StyleSheet, Animated } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
+import { Easing } from 'react-native-reanimated';
 
-import {Colors} from '../styles/Styles';
+import { Colors } from '../styles/Styles';
 
-import {DurationContext} from '../states/DurationProvider';
+import { DurationContext } from '../states/DurationProvider';
 
 interface CircularProgressProps {
   isCircularProgressActive: boolean;
