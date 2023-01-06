@@ -1,11 +1,11 @@
 import React from 'react';
-import {SafeAreaView, Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
+import { SafeAreaView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 
 import TabataRunBox from '../components/TabataRunBox';
 
-import {NavigationProp} from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 interface HomeScreenProps {
   navigation: NavigationProp<any>;

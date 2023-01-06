@@ -6,9 +6,9 @@ import {
   Text,
 } from 'react-native';
 
-import {Colors} from '../styles/Styles';
+import { Colors } from '../styles/Styles';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const TabataRunBox: React.FC = () => {
   return (

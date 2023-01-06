@@ -1,26 +1,26 @@
 import React, {useContext, useRef} from 'react';
 import {View, Animated, StyleSheet, Dimensions} from 'react-native';
 
-import {DurationContext} from '../states/DurationProvider';
+import { RoundsContext } from '../states/RoundsProvider';
 
 const {width} = Dimensions.get('window');
 
 const ITEM_SIZE: number = width * 0.38;
 const ITEM_SPACING: number = (width - ITEM_SIZE) / 2;
 
-let timersExercises: number[] = [...Array(20).keys()].map(
-  (i: number) => (i + 1) * 5,
+let roundsNumber: number[] = [...Array(20).keys()].map(
+  (i: number) => (i + 1),
 );
 
-const ScrollExerciseDuration = () => {
+const ScrollRoudsNumber = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  const {setDurationExercise} = useContext(DurationContext);
+  const {setRounds} = useContext(RoundsContext);
 
   return (
-    <View style={styles.exerciseTimerContainer}>
+    <View style={styles.roundsNumberContainer}>
       <Animated.FlatList
-        data={timersExercises}
+        data={roundsNumber}
         keyExtractor={item => item.toString()}
         horizontal
         bounces={false}
@@ -29,10 +29,10 @@ const ScrollExerciseDuration = () => {
           {useNativeDriver: true},
         )}
         onMomentumScrollEnd={ev => {
-          const indexExercise = Math.round(
+          const indexRound = Math.round(
             ev.nativeEvent.contentOffset.x / ITEM_SIZE,
           );
-          setDurationExercise(timersExercises[indexExercise]);
+          setRounds(roundsNumber[indexRound]);
         }}
         showsHorizontalScrollIndicator={false}
         snapToInterval={ITEM_SIZE}
@@ -53,11 +53,11 @@ const ScrollExerciseDuration = () => {
             outputRange: [0.6, 1, 0.6],
           });
           return (
-            <View style={styles.exerciseScrollContainer}>
+            <View style={styles.roundsScrollContainer}>
               <Animated.Text
                 style={[
                   {
-                    ...styles.exerciseScrollContainerText,
+                    ...styles.roundsScrollContainerText,
                     opacity,
                     transform: [
                       {
@@ -76,21 +76,21 @@ const ScrollExerciseDuration = () => {
   );
 };
 
-export default ScrollExerciseDuration;
+export default ScrollRoudsNumber;
 
 const styles = StyleSheet.create({
-  exerciseTimerContainer: {
+  roundsNumberContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
   },
-  exerciseScrollContainer: {
+  roundsScrollContainer: {
     width: ITEM_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  exerciseScrollContainerText: {
+  roundsScrollContainerText: {
     color: 'white',
     fontSize: 100,
   },

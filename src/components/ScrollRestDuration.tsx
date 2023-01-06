@@ -18,7 +18,7 @@ const ScrollExerciseDuration = () => {
   const {setDurationRest} = useContext(DurationContext);
 
   return (
-    <View style={styles.exerciseTimerContainer}>
+    <View style={styles.restTimerContainer}>
       <Animated.FlatList
         data={timersRest}
         keyExtractor={item => item.toString()}
@@ -53,11 +53,11 @@ const ScrollExerciseDuration = () => {
             outputRange: [0.6, 1, 0.6],
           });
           return (
-            <View style={styles.exerciseScrollContainer}>
+            <View style={styles.restScrollContainer}>
               <Animated.Text
                 style={[
                   {
-                    ...styles.exerciseScrollContainerText,
+                    ...styles.restScrollContainerText,
                     opacity,
                     transform: [
                       {
@@ -79,18 +79,18 @@ const ScrollExerciseDuration = () => {
 export default ScrollExerciseDuration;
 
 const styles = StyleSheet.create({
-  exerciseTimerContainer: {
+  restTimerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
   },
-  exerciseScrollContainer: {
+  restScrollContainer: {
     width: ITEM_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  exerciseScrollContainerText: {
+  restScrollContainerText: {
     color: 'white',
     fontSize: 100,
   },
