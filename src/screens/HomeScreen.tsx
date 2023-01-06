@@ -1,14 +1,22 @@
 import React from 'react';
-import {SafeAreaView, Dimensions, StyleSheet} from 'react-native';
+import {SafeAreaView, Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
 
 import TabataRunBox from '../components/TabataRunBox';
 
+import {NavigationProp} from '@react-navigation/native';
+
 const {width, height} = Dimensions.get('window');
 
-const HomeScreen: React.FC = () => {
+interface HomeScreenProps {
+  navigation: NavigationProp<any>;
+}
+
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <TabataRunBox />
+      <TouchableOpacity onPress={() => navigation.navigate('SetupTabataScreen')}>
+        <TabataRunBox />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
