@@ -14,7 +14,7 @@ interface HomeScreenProps {
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('SetupTabataScreen')}>
+      <TouchableOpacity onPress={() => navigation.navigate('SetupTabata')}>
         <TabataRunBox />
       </TouchableOpacity>
     </SafeAreaView>
