@@ -1,52 +1,22 @@
-import React, {useState, useRef} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
-  Animated,
-  Easing,
+  Text,
 } from 'react-native';
-
-import ScrollExerciseDuration from './ScrollExerciseDuration';
-import ScrollRestDuration from './ScrollRestDuration';
-import NavigateButton from '../components/NavigateButton';
 
 import {Colors} from '../styles/Styles';
 
 const {width, height} = Dimensions.get('window');
 
-const TabataRunBox = () => {
-  const [open, setOpen] = useState(false);
-
-  const scaleValue = useRef(new Animated.Value(0.6)).current;
-
-  const handleOpen = () => {
-    setOpen(!open);
-    console.log(open);
-
-    Animated.timing(scaleValue, {
-      toValue: open ? 0.6 : 1,
-      duration: 250,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
-  };
-
+const TabataRunBox: React.FC = () => {
   return (
-    <Animated.View
-      style={{...styles.container, transform: [{scaleY: scaleValue}]}}>
-      <TouchableOpacity
-        style={styles.container}
-        activeOpacity={0.8}
-        onPress={handleOpen}>
-        <View style={styles.scrollView}>
-          <ScrollExerciseDuration />
-          <ScrollRestDuration />
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <Text style={styles.text}>Setup Tabata</Text>
         </View>
-        <NavigateButton />
-      </TouchableOpacity>
-    </Animated.View>
+      </View>
   );
 };
 
@@ -57,15 +27,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: width * 0.9,
-    height: height * 0.6,
+    height: height * 0.1,
     backgroundColor: Colors.darkGray,
     borderRadius: 25,
   },
-  scrollView: {
+  content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
-    //width: width,
+    flexDirection: 'row',
+  },
+  text: {
+    color: Colors.white,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });

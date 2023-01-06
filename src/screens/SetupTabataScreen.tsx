@@ -7,8 +7,8 @@ import ScrollRestDuration from '../components/ScrollRestDuration';
 const SetupTabataScreen = () => {
   return (
     <SafeAreaView>
-        <ScrollExerciseDuration />
-        <ScrollRestDuration />
+      <ScrollExerciseDuration />
+      <ScrollRestDuration />
     </SafeAreaView>
   )
 };

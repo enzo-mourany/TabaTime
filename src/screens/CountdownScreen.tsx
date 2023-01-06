@@ -5,15 +5,15 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import StartButton from '../components/StartButton';
 import ResetButton from '../components/ResetButton';
 import AnimatedBackground from '../components/AnimatedBackground';
 import AnimatedWave from '../components/AnimatedWave';
 import CircularProgress from '../components/CircularProgress';
-import {DurationContext} from '../states/DurationProvider';
-import {Colors} from '../styles/Styles';
+import { DurationContext } from '../states/DurationProvider';
+import { Colors } from '../styles/Styles';
 
 interface CountdownScreenProps {}
 
