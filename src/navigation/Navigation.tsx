@@ -3,6 +3,7 @@ import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 
 import HomeScreen from '../screens/HomeScreen';
 import CountdownScreen from '../screens/CountdownScreen';
+import SetupTabataScreen from '../screens/SetupTabataScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const Navigation: React.FC = () => {
       }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Countdown" component={CountdownScreen} />
+      <Stack.Screen name="SetupTabata" component={SetupTabataScreen} />
     </Stack.Navigator>
   );
 };
