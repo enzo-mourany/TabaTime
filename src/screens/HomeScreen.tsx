@@ -1,9 +1,8 @@
 import React from 'react';
 import { SafeAreaView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 
 import TabataRunBox from '../components/TabataRunBox';
-
-import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 

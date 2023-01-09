@@ -19,7 +19,7 @@ interface Props {
   }: {
     children: React.ReactNode;
   }) => {
-    const [rounds, setRounds] = useState<number>(5);
+    const [rounds, setRounds] = useState<number>(1);
 
     return (
         <RoundsContext.Provider

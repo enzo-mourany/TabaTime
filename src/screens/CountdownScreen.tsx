@@ -4,21 +4,25 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
+  Dimensions
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 
 import StartButton from '../components/StartButton';
-import ResetButton from '../components/ResetButton';
-import AnimatedBackground from '../components/AnimatedBackground';
 import AnimatedWave from '../components/AnimatedWave';
-import CircularProgress from '../components/CircularProgress';
 import { DurationContext } from '../states/DurationProvider';
+import { RoundsContext } from '../states/RoundsProvider';
 import { Colors } from '../styles/Styles';
+
+const { width, height } = Dimensions.get('window');
 
 interface CountdownScreenProps {}
 
 const CountdownScreen: React.FC<CountdownScreenProps> = () => {
   const {durationExercise, durationRest} = useContext(DurationContext);
+  const {rounds} = useContext(RoundsContext);
+
+  const [currentRound, setCurrentRound] = useState(1);
 
   interface IRunningState {
     isRunning: boolean;
@@ -42,7 +46,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
 
   useEffect(() => {
     let interval: any;
-    if (isRunning.isRunning) {
+    if (isRunning.isRunning && currentRound <= rounds) {
       interval = setInterval(() => {
         setRemainingTime({remainingTime: remainingTime.remainingTime - 1});
       }, 1000);
@@ -54,6 +58,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
       setRemainingTime({
         remainingTime: isExercise ? durationRest : durationExercise,
       });
+      !isExercise && setCurrentRound(currentRound + 1);
     }
     return () => clearInterval(interval);
   }, [isRunning, remainingTime, isExercise, durationExercise, durationRest]);
@@ -77,28 +82,24 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <AnimatedBackground />
-      <AnimatedWave />
-      <CircularProgress
-        isCircularProgressActive={
-          isCircularProgressActive.isCircularProgressActive
-        }
-        isRunning={isRunning.isRunning}
-        isExercise={isExercise}
-      />
-      <View style={styles.timer}>
-        <Text style={styles.textTimer}>{remainingTime.remainingTime}</Text>
-        <Text style={styles.exerciseStatus}>
-          {isExercise ? 'EXERCISE' : 'REST'}
-        </Text>
+      <View style={styles.countdown}>
+        <AnimatedWave />
+        <View style={styles.timer}>
+          <Text style={styles.textTimer}>{remainingTime.remainingTime}</Text>
+          <Text style={styles.exerciseStatus}>
+            {isExercise ? 'EXERCISE' : 'REST'}
+          </Text>
+        </View>
       </View>
-      <View style={styles.buttons}>
-        <TouchableOpacity onPress={handleStart}>
-          <StartButton isRunning={isRunning.isRunning} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleReset}>
-          <ResetButton />
-        </TouchableOpacity>
+      <View style={styles.status}>
+        <View style={styles.info}>
+          <Text style={styles.exerciseStatus}>Round {currentRound} / {rounds}</Text>
+        </View>
+        <View style={styles.buttons}>
+          <TouchableOpacity onPress={handleStart}>
+            <StartButton isRunning={isRunning.isRunning} />
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -109,9 +110,16 @@ export default CountdownScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.darkGray,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  countdown: {
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    height: height * 0.4,
+    width: width * 0.9,
   },
   timer: {
     width: 200,
@@ -119,7 +127,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
   },
   textTimer: {
     color: Colors.white,
@@ -133,18 +140,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 10,
   },
+  status: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: height * 0.5,
+  },
+  info: {
+    width: 200,
+    height: '60%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
   exerciseStatus: {
     color: Colors.white,
     fontSize: 20,
     opacity: 0.5,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
     position: 'relative',
-    width: '100%',
-    height: '100%',
-    bottom: 50,
   },
 });
