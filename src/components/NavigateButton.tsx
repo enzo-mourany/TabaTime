@@ -1,13 +1,25 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, Dimensions} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {Colors} from '../styles/Styles';
 
-const StartButton: React.FC = () => {
+const { width, height } = Dimensions.get('window');
+
+interface StartButtonProps {
+  text: string;
+}
+
+const StartButton: React.FC<StartButtonProps> = ({ text }) => {
   return (
-    <View style={styles.button}>
-      <Text style={styles.buttonText}>Run</Text>
-    </View>
+    <LinearGradient 
+      start={{x: 0, y: 0}} 
+      end={{x: 1, y: 0}} 
+      colors={[Colors.purple, Colors.pink]} 
+      style={styles.button}
+    >
+      <Text style={styles.buttonText}>{text}</Text>
+    </LinearGradient>
   );
 };
 

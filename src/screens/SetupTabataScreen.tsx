@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Image, Dimensions, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Image, Dimensions, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -25,10 +25,9 @@ const SetupTabataScreen: React.FC<SetupTabataScreenProps> = ({ navigation }) => 
         <ScrollRestDuration />
         <ScrollRoundsNumber />
       </View>
-      <ActionButton
-        onPress={() => navigation.navigate('Countdown')}
-        buttonText="Start Tabata"
-      />
+      <TouchableOpacity onPress={() => navigation.navigate('Countdown')}>
+        <ActionButton text="Start Tabata" />
+      </TouchableOpacity>
     </SafeAreaView>
   )
 };

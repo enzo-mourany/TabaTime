@@ -1,47 +1,51 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
-import { Colors } from '../../styles/Styles';
+import {StyleSheet, Text, Dimensions} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
-const { width } = Dimensions.get('window');
+import {Colors} from '../../styles/Styles';
+
+const { width, height } = Dimensions.get('window');
 
 interface ActionButtonProps {
-    onPress: () => void;
-    buttonText: string;
-    style?: object;
-    fontSize?: number;
-  }
+  text: string;
+}
 
-const ActionButton: React.FC<ActionButtonProps> = ({ onPress, buttonText, style, fontSize = 19 }) => (
-  <TouchableOpacity
-    onPress={onPress}
-    style={{
-      ...styles.container,
-      ...style,
-    }}>
-      <Text style={styles.buttonText} adjustsFontSizeToFit>
-        {buttonText}
-      </Text>
-  </TouchableOpacity>
-);
+const ActionButton: React.FC<ActionButtonProps> = ({ text }) => {
+  return (
+    <LinearGradient 
+      start={{x: 0, y: 0}} 
+      end={{x: 1, y: 0}} 
+      colors={[Colors.purple, Colors.pink]} 
+      style={styles.button}
+    >
+      <Text style={styles.buttonText}>{text}</Text>
+    </LinearGradient>
+  );
+};
 
 export default ActionButton;
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    width: width * 0.8,
-    height: 60,
-    borderRadius: 18,
+  button: {
     backgroundColor: Colors.cyan,
-    shadowRadius: 13,
-    shadowOffset: { width: 0, height: 8 },
+    blurRadius: 20,
+    width: width * 0.9,
+    height: 60,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowColor: Colors.cyan,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
   },
   buttonText: {
-    color: Colors.black,
-    fontSize: 19,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: Colors.white,
+    fontSize: 20,
+    fontWeight: '500',
     letterSpacing: 1,
   },
 });
