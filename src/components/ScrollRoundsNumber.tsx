@@ -1,5 +1,5 @@
 import React, {useContext, useRef} from 'react';
-import {View, Animated, StyleSheet, Dimensions} from 'react-native';
+import {View, Animated, StyleSheet, Dimensions, Text} from 'react-native';
 
 import { RoundsContext } from '../states/RoundsProvider';
 
@@ -19,6 +19,7 @@ const ScrollRoudsNumber = () => {
 
   return (
     <View style={styles.roundsNumberContainer}>
+      <Text style={styles.title}>Rounds</Text>
       <Animated.FlatList
         data={roundsNumber}
         keyExtractor={item => item.toString()}
@@ -93,5 +94,14 @@ const styles = StyleSheet.create({
   roundsScrollContainerText: {
     color: 'white',
     fontSize: 100,
+  },
+  title: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '500',
+    letterSpacing: 1,
+    opacity: 0.5,
+    position: 'absolute',
+    top: 10,
   },
 });

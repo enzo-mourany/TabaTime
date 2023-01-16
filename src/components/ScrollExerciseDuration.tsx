@@ -1,5 +1,5 @@
 import React, {useContext, useRef} from 'react';
-import {View, Animated, StyleSheet, Dimensions} from 'react-native';
+import {View, Animated, StyleSheet, Dimensions, Text} from 'react-native';
 
 import {DurationContext} from '../states/DurationProvider';
 
@@ -19,6 +19,7 @@ const ScrollExerciseDuration = () => {
 
   return (
     <View style={styles.exerciseTimerContainer}>
+      <Text style={styles.title}>Exercise Duration</Text>
       <Animated.FlatList
         data={timersExercises}
         keyExtractor={item => item.toString()}
@@ -93,5 +94,14 @@ const styles = StyleSheet.create({
   exerciseScrollContainerText: {
     color: 'white',
     fontSize: 100,
+  },
+  title: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '500',
+    letterSpacing: 1,
+    opacity: 0.5,
+    position: 'absolute',
+    top: 10,
   },
 });

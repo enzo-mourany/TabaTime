@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Image, Dimensions } from 'react-native';
+import { SafeAreaView, StyleSheet, Image, Dimensions, View } from 'react-native';
 import React from 'react';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -20,9 +20,11 @@ const SetupTabataScreen: React.FC<SetupTabataScreenProps> = ({ navigation }) => 
       <Image source={require('../assets/img/background.png')} 
         style={{position: 'absolute', top: 0, left: 0, width: width, height: height}}
       />
-      <ScrollExerciseDuration />
-      <ScrollRestDuration />
-      <ScrollRoundsNumber />
+      <View style={styles.scrollContainer}>
+        <ScrollExerciseDuration />
+        <ScrollRestDuration />
+        <ScrollRoundsNumber />
+      </View>
       <ActionButton
         onPress={() => navigation.navigate('Countdown')}
         buttonText="Start Tabata"
@@ -39,5 +41,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
+  },
+  scrollContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: width,
+    height: height,
+    paddingTop: 50,
+    paddingBottom: 50,
   },
 });
