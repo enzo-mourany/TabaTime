@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, Image, Dimensions } from 'react-native';
 import React from 'react';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -8,6 +8,8 @@ import ScrollRoundsNumber from '../components/ScrollRoundsNumber';
 
 import ActionButton from '../components/input/ActionButton';
 
+const { width, height } = Dimensions.get('window');
+
 interface SetupTabataScreenProps {
   navigation: NavigationProp<any>;
 }
@@ -15,6 +17,9 @@ interface SetupTabataScreenProps {
 const SetupTabataScreen: React.FC<SetupTabataScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
+      <Image source={require('../assets/img/background.png')} 
+        style={{position: 'absolute', top: 0, left: 0, width: width, height: height}}
+      />
       <ScrollExerciseDuration />
       <ScrollRestDuration />
       <ScrollRoundsNumber />
