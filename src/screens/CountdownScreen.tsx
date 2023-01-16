@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  Dimensions
+  Dimensions,
+  Image
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 
@@ -82,8 +83,10 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Image source={require('../assets/img/background.png')} 
+        style={{position: 'absolute', top: 0, left: 0, width: width, height: height}}
+      />
       <View style={styles.countdown}>
-        <AnimatedWave />
         <View style={styles.timer}>
           <Text style={styles.textTimer}>{remainingTime.remainingTime}</Text>
           <Text style={styles.exerciseStatus}>
@@ -93,7 +96,7 @@ const CountdownScreen: React.FC<CountdownScreenProps> = () => {
       </View>
       <View style={styles.status}>
         <View style={styles.info}>
-          <Text style={styles.exerciseStatus}>Round {currentRound} / {rounds}</Text>
+          <Text style={styles.exerciseStatus}>{currentRound < rounds ? `Round ${currentRound} / ${rounds}` : 'FINISHED'}</Text>
         </View>
         <View style={styles.buttons}>
           <TouchableOpacity onPress={handleStart}>
