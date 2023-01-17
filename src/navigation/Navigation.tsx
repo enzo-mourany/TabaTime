@@ -14,9 +14,8 @@ const Navigation: React.FC = () => {
         headerShown: false,
         ...TransitionPresets.SlideFromRightIOS,
       }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Countdown" component={CountdownScreen} />
       <Stack.Screen name="SetupTabata" component={SetupTabataScreen} />
+      <Stack.Screen name="Countdown" component={CountdownScreen} />
     </Stack.Navigator>
   );
 };
